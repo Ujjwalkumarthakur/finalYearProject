@@ -1,0 +1,63 @@
+{%  extends 'notes_sharing/navigation.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-6">
+            <h2 class="text-center">Existing Student</h2>
+            <hr>
+            <p>Creating an account with our website, you will be able to move through the notes uploading, downloading process and more.</p>
+            <center><a href="{% url 'login' %}" class="btn btn-danger text-white mt-5" >Login</a></center>
+        </div>
+        <div class="col-sm-6">
+            <h2 class="text-center">Register Account</h2>
+            <hr>
+            <form method="post">
+                {% csrf_token %}
+                <label>First Name</label>
+                <input type="text" class="form-control" placeholder="Enter First Name" name="fname">
+                <label>Last Name</label>
+                <input type="text" class="form-control" placeholder="Enter Last Name" name="lname">
+                <label>Contact</label>
+                <input type="text" class="form-control" placeholder="+91 0000000000" name="con">
+                <label>Email Address</label>
+                <input type="email" class="form-control" placeholder="Enter Email ID" name="emailid">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Enter Password" name="pwd">
+                 <label>Class</label>
+                <select class="form-control" name="cls">
+                    <option value="B.Sc-IT">B.Sc-IT</option>
+                    <option value="B.Sc-CS">B.Sc-CS</option>
+                    <option value="B.Sc">B.Sc</option>
+                    <option value="B.A">B.A</option>
+                    <option value="B.A.F">B.A.F</option>
+                    <option value="B.Com">B.Com</option>
+                    <option value="B.M.S">B.M.S</option>
+                    <option value="B.B.I">B.B.I</option>
+                </select>
+                <label>You are?</label>
+                <select class="form-control" name="role">
+                    <option value="Teacher">Teacher</option>
+                    <option value="Student">Student</option>
+                </select>
+                <input type="submit" class="btn btn-danger mt-2" value="Register">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% ifequal error "no" %}
+<script>
+    alert('SignUp Successfully');
+    window.location=('{% url 'login' %}');
+</script>
+{% endifequal %}
+
+{% ifequal error "yes" %}
+<script>
+    alert('Something Went Wrong, Try Again');
+</script>
+{% endifequal %}
+
+{% endblock %}

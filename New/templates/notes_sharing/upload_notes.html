@@ -1,0 +1,61 @@
+{%  extends 'notes_sharing/user_navigation.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container mt-5">
+    <h2 class="text-center">Upload Notes</h2>
+            <hr>
+    <div class="row">
+        <div class="col-sm-6">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label>Class</label>
+                <select class="form-control" name="branch">
+                    <option value="">---Select Class---</option>
+                    <option value="B.Sc-IT">B.Sc-IT</option>
+                    <option value="B.Sc-CS">B.Sc-CS</option>
+                    <option value="B.Sc">B.Sc</option>
+                    <option value="B.A">B.A</option>
+                    <option value="B.A.F">B.A.F</option>
+                    <option value="B.Com">B.Com</option>
+                    <option value="B.M.S">B.M.S</option>
+                    <option value="B.B.I">B.B.I</option>
+                </select>
+                <label>Subject</label>
+                <input type="text" class="form-control" placeholder="Enter Subject Name" name="subject">
+                <label>Notes File</label>
+                <input type="file" class="form-control"  name="notesfile">
+                <label>File Type</label>
+                <select class="form-control" name="filetype">
+                    <option value="">---Select File Type---</option>
+                    <option value="PDF">PDF</option>
+                    <option value="PPT">PPT</option>
+                    <option value="DOC/DOCX">DOC/DOCX</option>
+                    <option value="TXT">TXT</option>
+                    <option value="IMAGE">IMAGE</option>
+                    <option value="ZIP/RAR">ZIP/RAR</option>
+                    <option value="OTHER">OTHER</option></select>
+                <label>Description</label>
+                <textarea class="form-control" name="description"></textarea>
+                <input type="submit" class="btn btn-danger mt-2" value="Upload">
+            </form>
+        </div>
+        <div class="col-sm-6">
+            <img src="{% static 'images/homepage.jpg' %}" class="img-thumbnail my-2" style="width:100%;height:420px">
+        </div>
+    </div>
+</div>
+
+{% ifequal error "no" %}
+<script>
+    alert('Notes Uploaded Successfully');
+</script>
+{% endifequal %}
+
+{% ifequal error "yes" %}
+<script>
+    alert('Something Went Wrong, Try Again');
+</script>
+{% endifequal %}
+
+{% endblock %}
