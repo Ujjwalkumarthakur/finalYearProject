@@ -39,6 +39,24 @@
 
 
 
+    .notes_share_btn {
+      
+      /*padding: 5px;*/
+      margin-top: -50px;
+      margin-right: 40px;
+      text-decoration: none;
+      float: right;
+      border-radius: 2px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      transition: 0.5s;
+      
+    }
+
+    .notes_share_btn:hover {
+      
+    }
     .logout_btn {
       padding: 5px;
       background: #ef5350;
@@ -172,13 +190,18 @@
     <div class="right_area">
       <a href="/logout" class="logout_btn" style="border-radius:0px;"> Logout</a>
     </div>
+    <div class="right_area">
+      {% comment %} <a href="/admin-question" class="notes_share_btn"><i class="fa fa-book"></i>Notes sharing</a> {% endcomment %}
+      <a href="/admin_home" class="notes_share_btn"><i class="fa fa-book"></i>Notes sharing</a>
+      
+    </div>
   </header>
   <!--header area end-->
   <!--sidebar start-->
   <div class="sidebar">
     <center>
 
-      <img src="{% static "image/admin.png" %}" class="profile_image" alt="">
+      <img src="{% static 'image/admin.png' %}" class="profile_image" alt="">
       <h4>Admin</h4>
 
     </center>

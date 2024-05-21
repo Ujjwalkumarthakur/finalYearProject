@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+# from .models import *
 
 from student.models import Student
 
@@ -41,7 +42,15 @@ class SignUp(models.Model):
     branch = models.CharField(max_length=30, null=True)
     role = models.CharField(max_length=15, null=True)
 
+
+    # user = "user"
+    # contact = 7247389890
+    # branch = "btech"
+    # role = "student"
+
     def __str__(self):
+        print("stateModel")
+        # return self.user.username
         return self.user.username
 
 

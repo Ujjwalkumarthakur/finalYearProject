@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect,reverse
 
-from exam.models import SignUp as s
+# from exam.models import SignUp
+from .models import *
 
 from . import forms,models
 from django.db.models import Sum
@@ -44,7 +45,7 @@ from django.contrib.auth import authenticate,logout,login
 
 
 # Done by ujjwal
-def notes_homePage(request):
+def notes_sharing(request):
     # return render(request,'notes_sharing/notes_home.html')
     return render(request,'notes_sharing/index.html')
     # return render(request,'notes_sharing/navigation.html')
@@ -385,28 +386,28 @@ def userlogin(request):
 def login_admin(request):
     return render(request, 'notes_sharing/login_admin.html')
 
-def signup1(request):
-    error = ""
-    if request.method == "POST":
-        f = request.POST['fname']
-        l = request.POST['lname']
-        n = request.POST['con']
-        e = request.POST['emailid']
-        p = request.POST['pwd']
-        c = request.POST['cls']
-        r = request.POST['role']
-        try:
-            user = User.objects.create_user(username = e, password = p, first_name = f, last_name =l)
-            s.objects.create(user = user, contact = n, branch = c, role = r)
-            error = "no"
-        except:
-            error = "yes"
-    d = {'error' : error}
-    return render(request, 'notes_sharing/signup.html', d)
+# def signup1(request):
+#     error = ""
+#     if request.method == "POST":
+#         f = request.POST['fname']
+#         l = request.POST['lname']
+#         n = request.POST['con']
+#         e = request.POST['emailid']
+#         p = request.POST['pwd']
+#         c = request.POST['cls']
+#         r = request.POST['role']
+#         try:
+#             user = User.objects.create_user(username = e, password = p, first_name = f, last_name =l)
+#             s.objects.create(user = user, contact = n, branch = c, role = r)
+#             error = "no"
+#         except:
+#             error = "yes"
+#     d = {'error' : error}
+#     return render(request, 'notes_sharing/signup.html', d)
 
 def admin_home(request):
-    if not request.user.is_staff:
-        return redirect('login_admin')
+    # if not request.user.is_staff:
+    #     return redirect('login_admin')
     pn = Notes.objects.filter(status = "Pending").count()
     an = Notes.objects.filter(status = "Accept").count()
     rn = Notes.objects.filter(status = "Reject").count()
@@ -420,13 +421,14 @@ def login_admin(request):
     if request.method == 'POST':
         u = request.POST['uname']
         p = request.POST['pwd']
-        user = authenticate(username = u, password = p)
+        # user = authenticate(username = u, password = p)
         try:
-            if user.is_staff:
-                login(request, user)
-                error = "no"
-            else:
-                error = "yes"
+            error="no"
+            # if user.is_staff:
+            #     login(request, user)
+            #     error = "no"
+            # else:
+            #     error = "yes"
         except:
             error = "yes"
     d = {'error' : error}
@@ -436,20 +438,36 @@ def Logout(request):
     logout(request)
     return redirect('index')
 
+
+from exam.models import SignUp as s
+
 def profile(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
+    # if not request.user.is_authenticated:
+    #     return redirect('login')
     user = User.objects.get(id = request.user.id)
+    print("checkState usernam:")
+    print(user)
+    # print(user['contact'])
+    # data = SignUp.objects.filter(user=request.user.id)
+    # data = SignUp.objects.get(user = user.id)
+    # data = SignUp.objects.all()
+    # data = s.objects.get()
+    # print(data.first)
+    # d = {'data' : data,'user' : user}
+    # data = forms.models.SignUp.objects.all()
+    d = {'data':{},'user':user}
+    # print(data.model.branch)
     # print(user.username)
-    data = SignUp.objects.get(user = user)
-    d = {'data' : data, 'user' : user}
+    # print(user.email)
+    # print(user.contact)
+    # return render(request, 'notes_sharing/about.html', d)
     return render(request, 'notes_sharing/profile.html', d)
 
 def edit_profile(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
+#     if not request.user.is_authenticated:
+#         return redirect('login')
     user = User.objects.get(id = request.user.id)
-    data = SignUp.objects.get(user = user)
+    # data = SignUp.objects.get(user = user)
     error = False
     if request.method == 'POST':
         f = request.POST['fname']
@@ -458,13 +476,13 @@ def edit_profile(request):
         c = request.POST['branch']
         user.first_name = f
         user.last_name = l
-        data.contact = n
-        data.branch = c
+        # data.contact = n
+        # data.branch = c
         user.save()
-        data.save()
-        error = True
-    d = {'data' : data, 'user' : user, 'error' : error}
-    return render(request, 'notes_sharing/edit_profile.html', d)
+        # data.save()
+    #     error = True
+    # d = {'data' : data, 'user' : user, 'error' : error}
+    return render(request, 'notes_sharing/edit_profile.html', {})
 
 def change_password(request):
     if not request.user.is_authenticated:
@@ -521,8 +539,8 @@ def delete_mynotes(request, pid):
     return redirect('view_mynotes')
 
 def view_users(request):
-    if not request.user.is_authenticated:
-        return redirect('login_admin')
+    # if not request.user.is_authenticated:
+    #     return redirect('login_admin')
     users = SignUp.objects.all()
     d = {'users' : users}
     return render(request, 'notes_sharing/view_users.html', d)
@@ -535,36 +553,36 @@ def delete_users(request, pid):
     return redirect('view_users')
 
 def pending_notes(request):
-    if not request.user.is_authenticated:
-        return redirect('login_admin')
+    # if not request.user.is_authenticated:
+    #     return redirect('login_admin')
     notes = Notes.objects.filter(status = "Pending")
     d = {'notes' : notes}
     return render(request, 'notes_sharing/pending_notes.html', d)
 
 def accepted_notes(request):
-    if not request.user.is_authenticated:
-        return redirect('login_admin')
+    # if not request.user.is_authenticated:
+    #     return redirect('login_admin')
     notes = Notes.objects.filter(status = "Accept")
     d = {'notes' : notes}
     return render(request, 'notes_sharing/accepted_notes.html', d)
 
 def rejected_notes(request):
-    if not request.user.is_authenticated:
-        return redirect('login_admin')
+    # if not request.user.is_authenticated:
+    #     return redirect('login_admin')
     notes = Notes.objects.filter(status = "Reject")
     d = {'notes' : notes}
     return render(request, 'notes_sharing/rejected_notes.html', d)
 
 def all_notes(request):
-    if not request.user.is_authenticated:
-        return redirect('login_admin')
+    # if not request.user.is_authenticated:
+    #     return redirect('login_admin')
     notes = Notes.objects.all()
     d = {'notes' : notes}
     return render(request, 'notes_sharing/all_notes.html', d)
 
 def assign_status(request, pid):
-    if not request.user.is_authenticated:
-        return redirect('login_admin')
+    # if not request.user.is_authenticated:
+    #     return redirect('login_admin')
     notes = Notes.objects.get(id = pid)
     error = ""
     if request.method == "POST":
@@ -576,18 +594,56 @@ def assign_status(request, pid):
         except:
             error = "yes"
     d = {'notes': notes, 'error' : error}
-    return render(request, notes_sharing/'assign_status.html', d)
+    return render(request, 'notes_sharing/assign_status.html', d)
 
 def delete_notes(request, pid):
-    if not request.user.is_authenticated:
-        return redirect('login')
+    # if not request.user.is_authenticated:
+    #     return redirect('login')
     notes = Notes.objects.get(id = pid)
     notes.delete()
     return redirect('all_notes')
 
 def viewallnotes(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
+    # if not request.user.is_authenticated:
+    #     return redirect('login')
     notes = Notes.objects.filter(status = "Accept")
     d = {'notes' : notes}
     return render(request, 'notes_sharing/viewallnotes.html', d)
+
+
+
+def viewStudentnotes(request):
+    # if not request.user.is_authenticated:
+    #     return redirect('login')
+    # courseNames = ['b.tech','bca','mca','B.Sc','B.A','B.A.F','B.Com','B.M.S','B.B.I']
+    notes = Notes.objects.filter(status = "Accept")
+    courses = Course.objects.all()
+    # length = len(courses)
+    # await fetchCourseNotes()
+    # courseWiseNotes = {}
+    print("fetching notes data")
+    # print(courses[0].course_name)
+    # for i in range(0,len(notes)):
+    #     courseWiseNotes[notes[i].branch] = notes[i]
+    #     print(notes[i].branch)
+
+        # if i.branch==courseName:
+        #     courseNotes.append(i)
+    d = {'notes' : notes,'courseNames':courses}
+    return render(request, 'notes_sharing/student_course.html', d)
+
+
+
+
+
+def fetchCourseNotes(request,courseName):
+    print("Coursename:")
+    print(courseName)
+    notes = Notes.objects.filter(status = "Accept")
+    # courses = Course.objects.all()
+    courseNotes = []
+    for i in notes:
+        if i.subject==courseName:
+            courseNotes.append(i)
+    d = {'notes' : courseNotes}
+    return render(request, 'notes_sharing/course_notes.html', d)

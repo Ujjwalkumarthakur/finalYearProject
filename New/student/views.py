@@ -10,6 +10,20 @@ from exam import models as QMODEL
 from teacher import models as TMODEL
 
 
+
+# def course_view(request):
+#     return render(request,'student/student_courses.html')
+def viewStudentnotes(request):
+    # if not request.user.is_authenticated:
+    #     return redirect('login')
+    notes = QMODEL.Notes.objects.filter(status = "Accept")
+    d = {'notes' : notes}
+    print("checkstate: courseView")
+    print(notes.__length__())
+    return
+    return render(request, 'notes_sharing/student_course.html', d)
+
+
 #for showing signup/login button for student
 def studentclick_view(request):
     if request.user.is_authenticated:
@@ -19,10 +33,14 @@ def studentclick_view(request):
 def student_signup_view(request):
     userForm=forms.StudentUserForm()
     studentForm=forms.StudentForm()
+    print("signupState")
+    # print(userForm)
+    # return
     mydict={'userForm':userForm,'studentForm':studentForm}
     if request.method=='POST':
         userForm=forms.StudentUserForm(request.POST)
         studentForm=forms.StudentForm(request.POST,request.FILES)
+        mydict={'userForm':userForm,'studentForm':studentForm}
         if userForm.is_valid() and studentForm.is_valid():
             user=userForm.save()
             user.set_password(user.password)
@@ -124,4 +142,14 @@ def check_marks_view(request,pk):
 def student_marks_view(request):
     courses=QMODEL.Course.objects.all()
     return render(request,'student/student_marks.html',{'courses':courses})
+
+
   
+# @login_required(login_url='studentlogin')
+# @user_passes_test(is_student)
+
+
+# def notes_upload(request):
+#     # print("notes upload called")
+#     # courses=QMODEL.Course.objects.all()
+#     return render(request,'notes_sharing/notes_upload_screen.html')

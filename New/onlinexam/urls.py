@@ -8,13 +8,16 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # done by ujjwal
-    path('ujjwal_notes_share',views.notes_homePage,name='notes_share_any_name'),
+    # path('ujjwal_notes_share',views.notes_homePage,name='notes_share_any_name'),
+
+    
+    path('admin_dashboard',views.admin_dashboard_view,name='admin_dashboard'),
 
 
-    path('home', views.notes_homePage,name='home'),
+    # path('home', views.notes_homePage,name='home'),
     path('about', views.about, name='about'),
     path('login', views.userlogin, name='login'),
-    path('signup', views.signup1, name='signup'),
+    # path('signup', views.signup1, name='signup'),
     path('login_admin', views.login_admin, name='login_admin'),
     path('admin_home', views.admin_home, name='admin_home'),
     path('logout', views.Logout, name='logout'),
@@ -34,6 +37,7 @@ urlpatterns = [
     path('view_users', views.view_users, name='view_users'),
     path('viewallnotes', views.viewallnotes, name='viewallnotes'),
     path('', views.home_view, name='index'),
+    # path('courseNotes/<Course:courseName>', views.fetchCourseNotes,name='courseNotes'),
    
 
 
