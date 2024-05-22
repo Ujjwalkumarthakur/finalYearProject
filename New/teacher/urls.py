@@ -1,8 +1,11 @@
 from django.urls import path
 from teacher import views
+from exam import views as v
 from django.contrib.auth.views import LoginView
 
 urlpatterns = [
+path('notes_uploader', v.notes_sharing,name='notes_uploader'),
+    
 path('teacherclick', views.teacherclick_view),
 path('teacherlogin', LoginView.as_view(template_name='teacher/teacherlogin.html'),name='teacherlogin'),
 path('teachersignup', views.teacher_signup_view,name='teachersignup'),

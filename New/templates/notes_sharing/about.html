@@ -1,5 +1,73 @@
 {%  extends 'notes_sharing/user_navigation.html' %}
-{% comment %} {%  extends 'notes_sharing/navigation.html' %} {% endcomment %}
+
+
+
+{% block body %}
+{% load static %}
+
+<style>
+.image{
+width:100%;
+height:700px;
+background:url({% static 'images/homepage.jpg' %});
+background-repeat : no-repeat;
+background-position : center
+}
+</style>
+<div class="image ">
+<div class="transparentbox">
+    <p>Notes Sharing</p>
+</div>
+</div>
+
+<h4 class="text-center text-danger mt-5  mb-5">Just 4 steps to follow</h4>
+
+<div class="container text-danger mt-5">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="box1">
+                <p class="halfcircle"><i class="text-center fas fa-user-circle text-white mt-4" style="font-size:40px"></i></p>
+                <p class="halfcircleBottom" style="font-size:20px">Create Account</p>
+
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="box1">
+                <p class="halfcircle"><i class="text-center fas fa-sign-in-alt text-white mt-4" style="font-size:40px"></i></p>
+                <p class="halfcircleBottom" style="font-size:20px">Login</p>
+
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="box1">
+                <p class="halfcircle"><i class="text-center fas fa-upload text-white mt-4" style="font-size:40px"></i></p>
+                <p class="halfcircleBottom" style="font-size:20px">Upload Notes</p>
+
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="box1">
+                <p class="halfcircle"><i class="text-center fas fa-download text-white mt-4" style="font-size:40px"></i></p>
+                <p class="halfcircleBottom" style="font-size:20px">Download Notes</p>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
 {% load static %}
 {% block body %}
 
@@ -16,4 +84,4 @@
 <br>
 <br>
 
-{% endblock %}
+{% endblock %} {% endcomment %}

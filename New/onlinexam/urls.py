@@ -8,13 +8,16 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # done by ujjwal
-    path('ujjwal_notes_share',views.notes_homePage,name='notes_share_any_name'),
+    # path('ujjwal_notes_share',views.notes_homePage,name='notes_share_any_name'),
+
+    
+    path('admin_dashboard',views.admin_dashboard_view,name='admin_dashboard'),
 
 
-    path('home', views.notes_homePage,name='home'),
+    # path('home', views.notes_homePage,name='home'),
     path('about', views.about, name='about'),
     path('login', views.userlogin, name='login'),
-    path('signup', views.signup1, name='signup'),
+    # path('signup', views.signup1, name='signup'),
     path('login_admin', views.login_admin, name='login_admin'),
     path('admin_home', views.admin_home, name='admin_home'),
     path('logout', views.Logout, name='logout'),
@@ -22,7 +25,6 @@ urlpatterns = [
     path('edit_profile', views.edit_profile, name='edit_profile'),
     path('change_password', views.change_password, name='change_password'),
     path('upload_notes', views.upload_notes, name='upload_notes'),
-    path('view_mynotes', views.view_mynotes, name='view_mynotes'),
     path('pending_notes', views.pending_notes, name='pending_notes'),
     path('accepted_notes', views.accepted_notes, name='accepted_notes'),
     path('rejected_notes', views.rejected_notes, name='rejected_notes'),
@@ -32,8 +34,10 @@ urlpatterns = [
     path('delete_users/<int:pid>', views.delete_users, name='delete_users'),
     path('assign_status/<int:pid>', views.assign_status, name='assign_status'),
     path('view_users', views.view_users, name='view_users'),
+    path('view_mynotes', views.view_mynotes, name='view_mynotes'),
     path('viewallnotes', views.viewallnotes, name='viewallnotes'),
     path('', views.home_view, name='index'),
+    # path('courseNotes/<Course:courseName>', views.fetchCourseNotes,name='courseNotes'),
    
 
 

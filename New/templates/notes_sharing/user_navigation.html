@@ -1,7 +1,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
   {% load static %}
-  <title>Notes Sharing Site</title>
+  <title>Notes Sharing </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -11,11 +11,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
 <body>
-<h4 style="padding : 3%"><span style="color:blue">Study Notes</span><span style="color:green"> Sharing Site</span></h4>
+<!--<h4 style="padding : 3%"><span style="color:blue">Notes</span><span style="color:green"> Sharing</span></h4>-->
 <nav class="navbar navbar-expand-sm justify-content-center" style="background-color : lightgrey">
 <ul class="navbar-nav">
   <li class="navbar-item">
-    <a class="nav-link" href="{% url 'profile' %}">Home</a>
+    <a class="nav-link" href="{% url 'index' %}">Home</a>
   </li>
   <li class="navbar-item">
     <a class="nav-link" href="{% url 'upload_notes' %}">Upload Notes</a>
@@ -31,6 +31,7 @@
   </li>
     <div class="btn-group">
         <button type="button" class="btn btn-primary dropdown-toggle" style="text-transform:capitalize" data-toggle="dropdown">Welcome {{request.user.first_name}}</button>
+        {{request.user.data}}
         <div class="dropdown-menu">
             <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
             <a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Profile</a>

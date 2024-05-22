@@ -1,0 +1,216 @@
+{% extends 'student/studentbase.html' %}
+{% comment %} {%  extends 'notes_sharing/user_navigation.html' %} {% endcomment %}
+
+{% comment %} {% load widget_tweaks %} {% endcomment %}
+{% comment %} {% block content %} {% endcomment %}
+
+
+
+
+
+
+{% comment %} {% extends 'student/studentbase.html' %} {% endcomment %}
+{% load widget_tweaks %}
+{% block content %} 
+
+
+
+
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+      a:link {
+        text-decoration: none;
+      }
+  
+      .order-card {
+        color: rgb(255, 255, 255);
+      }
+      
+      .ishu{
+        color: #ffffff;
+      }
+  
+      .bg-c-blue {
+        background: #04868f;
+      }
+  
+      .bg-c-green {
+        background:#4C51BF;
+      }
+  
+      .bg-c-yellow {
+        background: #F56565;
+      }
+  
+      .bg-c-pink {
+        background: #663a30;
+      }
+  
+  
+      .card {
+        
+        -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+        box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+        margin-bottom: 30px;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+      }
+  
+      .card .card-block {
+        padding: 25px;
+      }
+  
+      .order-card i {
+        font-size: 26px;
+      }
+  
+      .f-left {
+        float: left;
+      }
+  
+      .f-right {
+        float: right;
+      }
+      header {
+      left: 0px;
+      right: 0px;
+    }
+    </style>
+    <script>
+        function ishufun(){
+            print("hjgjhgj");
+        }
+    </script>
+  </head>
+<br><br>
+
+
+{% for i in courseNames %}
+<div class="container">
+    <a href="{% url 'course_notes' i %}">
+    <div class="row">
+        <div class="col-md-4 col-xl-6">
+          <div class="card bg-c-blue order-card">
+              
+              <div class="card-block">
+                  <h6 class="m-b-20" ><span><a class ="ishu"href="{% url 'course_notes' i %}">{{i}}</a></span> </h6>
+                  {% comment %} <h6 class="m-b-20" color="white"><span><a href="{% url 'course_notes' i %}">{{i}}</a></span> </h6> {% endcomment %}
+                  <h2 class="text-right"><i class="fas fa-book f-left"></i><span></span></h2>
+            </div>
+          </div>
+        </div>
+        {% comment %} <div class="col-md-4 col-xl-6">
+            <div class="card bg-c-yellow order-card">
+                <div class="card-block">
+                    <h6 class="m-b-20" href="courseNotes">{{courseNames.1}}</h6>
+                    <h2 class="text-right"><i class="fas fa-book f-left"></i><span></span></h2>
+                    
+                    </h2>
+                    
+                </div>
+            </div>
+        </div> {% endcomment %}
+    </div>
+    </a>
+</div>
+{%endfor%}
+
+
+
+<br><br><br><br><br><br><br><br><br><br>
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {%  extends 'notes_sharing/user_navigation.html' %} {% endcomment %}
+{% comment %} {% load static %}
+{% block body %}
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+
+<script>
+    $(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
+
+<div class="container mt-5">
+    <h2 class="text-center">All Notes</h2>
+    <hr>
+    <table class="table table-bordered" id="example">
+        <thead>
+        <tr>
+            <th>Sr. No.</th>
+            <th>Uploading By</th>
+            <th>Uploading Date</th>
+            <th>Class</th>
+            <th>subject</th>
+            <th>Download Notes</th>
+            <th>File Type</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Assign Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        {% for i in notes %}
+        <tbody>
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.user.username}}</td>
+            <td>{{i.uploadingdate}}</td>
+            <td>{{i.branch}}</td>
+            <td>{{i.subject}}</td>
+            <td><a href="{{i.notesfile.url}}" class="btn btn-success" download>Download</a></td>
+            <td>{{i.filetype}}</td>
+            <td>{{i.description}}</td>
+            <td>{{i.status}}</td>
+            <td><a href="{% url 'assign_status' i.id %}" class="btn btn-success">Assign Status</a></td>
+            <td><a href="{% url 'delete_notes' i.id %}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+ {% endcomment %}
+
+
+
+
+{% endblock content %} 

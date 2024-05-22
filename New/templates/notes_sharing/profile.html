@@ -10,7 +10,7 @@
             <b>Full Name :</b>
         </div>
         <div class="col-md-6" style="text-transform : capitalize">
-            {{data.user.first_name}} {{data.user.last_name}}
+            {{user.first_name}} {{user.last_name}}
         </div>
     </div>
     <hr>
@@ -19,10 +19,10 @@
             <b>Email Id :</b>
         </div>
         <div class="col-md-6">
-            {{data.user.username}}
+            {{user.username}}
         </div>
     </div>
-    <hr>
+    {% comment %} <hr>
     <div class="row">
         <div class="col-md-6">
             <b>Contact :</b>
@@ -30,16 +30,16 @@
         <div class="col-md-6">
             {{data.contact}}
         </div>
-    </div>
-    <hr>
+    </div> {% endcomment %}
+    {% comment %} <hr>
     <div class="row">
         <div class="col-md-6">
-            <b>Class :</b>
+            <b>Address :</b>
         </div>
         <div class="col-md-6">
-            {{data.branch}}
+            {{data.address}}
         </div>
-    </div>
+    </div> {% endcomment %}
     <hr>
     <a href="{% url 'edit_profile' %}" class="btn btn-primary mt-2">Edit Profile</a>
 </div>

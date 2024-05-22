@@ -12,6 +12,7 @@
                 <label>Class</label>
                 <select class="form-control" name="branch">
                     <option value="">---Select Class---</option>
+                    <option value="B.tech">B.tech</option>
                     <option value="B.Sc-IT">B.Sc-IT</option>
                     <option value="B.Sc-CS">B.Sc-CS</option>
                     <option value="B.Sc">B.Sc</option>
@@ -22,7 +23,16 @@
                     <option value="B.B.I">B.B.I</option>
                 </select>
                 <label>Subject</label>
-                <input type="text" class="form-control" placeholder="Enter Subject Name" name="subject">
+                <select class="form-control" name="subject">
+                    <option value="">---select subject---</option>
+                    {% for i in subjects%}
+                    <option value={{i}}>{{i}}</option>
+                    {% endfor %}
+                </select>
+
+
+
+                {% comment %} <input type="text" class="form-control" placeholder="Enter Subject Name" name="subject"> {% endcomment %}
                 <label>Notes File</label>
                 <input type="file" class="form-control"  name="notesfile">
                 <label>File Type</label>
