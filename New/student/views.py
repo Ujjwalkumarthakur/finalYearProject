@@ -13,15 +13,17 @@ from teacher import models as TMODEL
 
 # def course_view(request):
 #     return render(request,'student/student_courses.html')
-def viewStudentnotes(request):
-    # if not request.user.is_authenticated:
-    #     return redirect('login')
-    notes = QMODEL.Notes.objects.filter(status = "Accept")
-    d = {'notes' : notes}
-    print("checkstate: courseView")
-    print(notes.__length__())
-    return
-    return render(request, 'notes_sharing/student_course.html', d)
+
+
+# def viewStudentnotes(request):
+#     # if not request.user.is_authenticated:
+#     #     return redirect('login')
+#     notes = QMODEL.Notes.objects.filter(status = "Accept")
+#     d = {'notes' : notes}
+#     print("checkstate: courseView")
+#     print(notes.__length__())
+#     return
+#     return render(request, 'notes_sharing/student_course.html', d)
 
 
 #for showing signup/login button for student

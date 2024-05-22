@@ -523,17 +523,23 @@ def upload_notes(request):
     return render(request, 'notes_sharing/upload_notes.html', d)
 
 def view_mynotes(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
+    # if not request.user.is_authenticated:
+    #     return redirect('login')
+    userType=""
+    if is_student(request.user): 
+        userType = "student"     
+    if is_teacher(request.user): 
+        userType = "teacher"     
     user = User.objects.get(id = request.user.id)
     notes = Notes.objects.filter(user = user)
+    
 
-    d = {'notes' : notes}
+    d = {'notes' : notes,"userType":userType}
     return render(request, 'notes_sharing/view_mynotes.html', d)
 
 def delete_mynotes(request, pid):
-    if not request.user.is_authenticated:
-        return redirect('login')
+    # if not request.user.is_authenticated:
+    #     return redirect('login')
     notes = Notes.objects.get(id = pid)
     notes.delete()
     return redirect('view_mynotes')
@@ -574,6 +580,7 @@ def rejected_notes(request):
     return render(request, 'notes_sharing/rejected_notes.html', d)
 
 def all_notes(request):
+    # return viewallnotes
     # if not request.user.is_authenticated:
     #     return redirect('login_admin')
     notes = Notes.objects.all()
@@ -606,8 +613,13 @@ def delete_notes(request, pid):
 def viewallnotes(request):
     # if not request.user.is_authenticated:
     #     return redirect('login')
+    userType = ""
+    if is_teacher(request.user): 
+        userType = "TEACHER"
+    if is_student(request.user): 
+        userType = "student"     
     notes = Notes.objects.filter(status = "Accept")
-    d = {'notes' : notes}
+    d = {'notes' : notes,"userType":userType}
     return render(request, 'notes_sharing/viewallnotes.html', d)
 
 
