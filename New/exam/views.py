@@ -503,8 +503,8 @@ def change_password(request):
     return render(request, 'notes_sharing/change_password.html', d)
 
 def upload_notes(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
+    # if not request.user.is_authenticated:
+    #     return redirect('login')
     error = ""
     if request.method == "POST":
         b = request.POST['branch']
@@ -519,7 +519,11 @@ def upload_notes(request):
             error = "no"
         except:
             error = "yes"
-    d = {'error' : error}
+    courseNames = Course.objects.all()
+    print("Course upload")
+    print(courseNames)
+    # return
+    d = {'error' : error,'subjects':courseNames}
     return render(request, 'notes_sharing/upload_notes.html', d)
 
 def view_mynotes(request):
