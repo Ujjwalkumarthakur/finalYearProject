@@ -32,7 +32,7 @@
         <tr>
 
           <th>Name</th>
-          <th>Photo</th>
+          {% comment %} <th>Photo</th> {% endcomment %}
           <th>Contact</th>
           <th>Address</th>
          
@@ -43,7 +43,13 @@
       <tr>
 
         <td> {{t.get_name}}</td>
+        
+        {% comment %} {% if t.profile_pic %}%
         <td> <img src="{% static t.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        {% else %}
+        <td> <img src="{% static 'image/student.png' %}" class="profile_image" alt=""></td>
+          
+        {% endif %} {% endcomment %}
         <td>{{t.mobile}}</td>
         <td>{{t.address}}</td>
         

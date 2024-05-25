@@ -32,7 +32,7 @@
         <tr>
 
           <th>Name</th>
-          <th>Photo</th>
+          {% comment %} <th>Photo</th> {% endcomment %}
           
          
           <th>Action</th>
@@ -43,7 +43,7 @@
       <tr>
 
         <td> {{t.get_name}}</td>
-        <td> <img src="{% static t.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        {% comment %} <td> <img src="{% static t.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td> {% endcomment %}
         
         
         <td><a class="btn btn-primary btn-sm" style="border-radius: 0%;" href="{% url 'admin-view-marks' t.id  %}"><span class="glyphicon glyphicon-eye-open"></span> View Marks</a></td>

@@ -190,6 +190,14 @@ def admin_student_view(request):
 @login_required(login_url='adminlogin')
 def admin_view_student_view(request):
     students= SMODEL.Student.objects.all()
+    print("studentView Checkstate:")
+    # print(len(students))
+    # for i in students:
+    #     if(i.profile_pic.url!=None):
+    #         print(i.profile_pic.url)
+    #     else:
+    #         print("hello ishu")
+    # return
     return render(request,'exam/admin_view_student.html',{'students':students})
 
 
